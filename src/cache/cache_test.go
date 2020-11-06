@@ -36,7 +36,7 @@ func TestCache(t *testing.T) {
 
 var cacheResponse interface{}
 
-func BenchmarkMultiValueGet(b *testing.B) {
+func BenchmarkGet(b *testing.B) {
 	benchmarks := []struct {
 		name string
 		dataSize int
@@ -112,7 +112,7 @@ func BenchmarkMultiValueGet(b *testing.B) {
 	}
 }
 
-func BenchmarkMultiValueSet(b *testing.B) {
+func BenchmarkSet(b *testing.B) {
 	benchmarks := []struct {
 		name string
 		dataSize int
