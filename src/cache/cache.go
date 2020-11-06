@@ -83,7 +83,6 @@ func (c *Cache) Delete(key string) {
 func (c *Cache) Get(key string) (interface{}, bool) {
 	c.lock.RLock()
 	defer c.lock.RUnlock()
-
 	entry, ok := c.data[key]
 	return entry.value, ok
 }

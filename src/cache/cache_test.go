@@ -9,20 +9,25 @@ import (
 func TestCache(t *testing.T) {
 	cache := New(time.Minute)
 
+	// Get should fail as no item is set
 	val, ok := cache.Get("abc123")
 	if ok {
 		t.Errorf(`wanted %v, %v - got %v, %v`, nil, false, val, ok)
 	}
 
+	// Set the item...
 	cache.Set("abc123", "something", time.Minute * 20)
 
+	// Get should succeed as there is an item now
 	val, ok = cache.Get("abc123")
 	if !ok {
 		t.Errorf(`wanted %v, %v - got %v, %v`, "something", true, val, ok)
 	}
 
+	// Delete the item...
 	cache.Delete("abc123")
 
+	// Get should fail as no item is set
 	val, ok = cache.Get("abc123")
 	if ok {
 		t.Errorf(`wanted %v, %v - got %v, %v`, nil, false, val, ok)
@@ -101,7 +106,7 @@ func BenchmarkMultiValueGet(b *testing.B) {
 			b.ResetTimer()
 
 			for i := 0; i < b.N; i++ {
-				cacheResponse, _ = cache.Get("abc123")
+				cache.Get("abc123")
 			}
 		})
 	}
