@@ -10,8 +10,7 @@ const (
 )
 
 type cacheEntry struct {
-	duration time.Duration
-	setAt time.Time
+	expiresAt int64
 	value interface{}
 }
 
@@ -19,7 +18,7 @@ type cacheData map[string]cacheEntry
 
 type Cache struct {
 	lock sync.RWMutex
-	data map[string]cacheEntry
+	data cacheData
 	done chan struct{}
 }
 
@@ -36,18 +35,23 @@ func New(cleanupFrequency time.Duration) *Cache {
 
 func cleaner(c *Cache, frequency time.Duration) {
 	ticker := time.NewTicker(frequency)
-	select {
-	// Terminate the goroutine if the cache has been closed.
-	case <-c.done:
-		return
-	case <-ticker.C:
-		c.lock.Lock()
-		for k, v := range c.data {
-			if v.duration >= 0 && time.Now().After(v.setAt.Add(v.duration)) {
-				delete(c.data, k)
+	for {
+		select {
+		// Terminate the goroutine if the cache has been closed.
+		case <-c.done:
+			return
+		case <-ticker.C:
+			c.lock.Lock()
+			for k, v := range c.data {
+				if v.expiresAt == 0 {
+					continue
+				}
+				if time.Now().UnixNano() > v.expiresAt {
+					delete(c.data, k)
+				}
 			}
+			c.lock.Unlock()
 		}
-		c.lock.Unlock()
 	}
 }
 
@@ -55,15 +59,25 @@ func (c *Cache) Set(key string, value interface{}, duration time.Duration) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 
+	var expiresAt int64
+	if duration != indefinite {
+		expiresAt = time.Now().Add(duration).UnixNano()
+	}
+
 	c.data[key] = cacheEntry{
-		duration: duration,
-		setAt:    time.Now(),
+		expiresAt: expiresAt,
 		value:    value,
 	}
 }
 
 func (c *Cache) SetIndefinite(key string, value interface{}) {
 	c.Set(key, value, indefinite)
+}
+
+func (c *Cache) Delete(key string) {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+	delete(c.data, key)
 }
 
 func (c *Cache) Get(key string) (interface{}, bool) {

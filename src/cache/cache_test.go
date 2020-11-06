@@ -20,6 +20,13 @@ func TestCache(t *testing.T) {
 	if !ok {
 		t.Errorf(`wanted %v, %v - got %v, %v`, "something", true, val, ok)
 	}
+
+	cache.Delete("abc123")
+
+	val, ok = cache.Get("abc123")
+	if ok {
+		t.Errorf(`wanted %v, %v - got %v, %v`, nil, false, val, ok)
+	}
 }
 
 var cacheResponse interface{}
@@ -168,5 +175,14 @@ func BenchmarkMultiValueSet(b *testing.B) {
 				cache.Set(strconv.Itoa(i), value, time.Minute * 20)
 			}
 		})
+	}
+}
+
+func BenchmarkDelete(b *testing.B) {
+	cache := New(time.Second * 30)
+	defer cache.Close()
+
+	for i := 0; i < b.N; i++ {
+		cache.Delete("abc123")
 	}
 }
