@@ -17,12 +17,13 @@ You can deliberately remove entries from the cache using the `Delete` method.
 package main
 
 import (
-    "./src/cache"
+    "./src"
     "time"
 )
 
 func main() {
     c := cache.New(time.Minute)
+    defer c.Close()
 
     // Store a value against 'a-key' for 5 minutes...
     c.Set("a-key", "some-complex-value", time.Minute * 5)
