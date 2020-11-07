@@ -17,7 +17,7 @@ type cacheEntry struct {
 type cacheData map[string]cacheEntry
 
 type Cache struct {
-	lock sync.RWMutex
+	mu   sync.RWMutex
 	data cacheData
 	done chan struct{}
 }
@@ -41,7 +41,7 @@ func cleaner(c *Cache, frequency time.Duration) {
 		case <-c.done:
 			return
 		case <-ticker.C:
-			c.lock.Lock()
+			c.mu.Lock()
 			for k, v := range c.data {
 				if v.expiresAt == 0 {
 					continue
@@ -50,14 +50,14 @@ func cleaner(c *Cache, frequency time.Duration) {
 					delete(c.data, k)
 				}
 			}
-			c.lock.Unlock()
+			c.mu.Unlock()
 		}
 	}
 }
 
 func (c *Cache) Set(key string, value interface{}, duration time.Duration) {
-	c.lock.Lock()
-	defer c.lock.Unlock()
+	c.mu.Lock()
+	defer c.mu.Unlock()
 
 	var expiresAt int64
 	if duration != indefinite {
@@ -75,14 +75,14 @@ func (c *Cache) SetIndefinite(key string, value interface{}) {
 }
 
 func (c *Cache) Delete(key string) {
-	c.lock.Lock()
-	defer c.lock.Unlock()
+	c.mu.Lock()
+	defer c.mu.Unlock()
 	delete(c.data, key)
 }
 
 func (c *Cache) Get(key string) (interface{}, bool) {
-	c.lock.RLock()
-	defer c.lock.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	entry, ok := c.data[key]
 	return entry.value, ok
 }
