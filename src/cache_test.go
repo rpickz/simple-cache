@@ -1,4 +1,4 @@
-package cache
+package simplecache
 
 import (
 	"strconv"
@@ -15,8 +15,20 @@ func TestCache(t *testing.T) {
 		t.Errorf(`wanted %v, %v - got %v, %v`, nil, false, val, ok)
 	}
 
+	// Check there are no entries...
+	l := cache.Len()
+	if l != 0 {
+		t.Errorf(`wanted 0 - got %v`, l)
+	}
+
 	// Set the item...
 	cache.Set("abc123", "something", time.Minute * 20)
+
+	// Check there is 1 entry...
+	l = cache.Len()
+	if l != 1 {
+		t.Errorf(`wanted 1 - got %v`, l)
+	}
 
 	// Get should succeed as there is an item now
 	val, ok = cache.Get("abc123")
@@ -26,6 +38,12 @@ func TestCache(t *testing.T) {
 
 	// Delete the item...
 	cache.Delete("abc123")
+
+	// Check there are no entries...
+	l = cache.Len()
+	if l != 0 {
+		t.Errorf(`wanted 0 - got %v`, l)
+	}
 
 	// Get should fail as no item is set
 	val, ok = cache.Get("abc123")
@@ -93,7 +111,6 @@ func BenchmarkGet(b *testing.B) {
 		{"Byte2147483648x10000", 2147483648, 10000},
 	}
 
-
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
 			cache := New(time.Second * 30)
@@ -105,7 +122,7 @@ func BenchmarkGet(b *testing.B) {
 			cache.Set("abc123", value, time.Minute * 20)
 			b.ResetTimer()
 
-			for i := 0; i < b.N; i++ {
+			for n := 0; n < b.N; n++ {
 				cache.Get("abc123")
 			}
 		})
@@ -176,8 +193,8 @@ func BenchmarkSet(b *testing.B) {
 			value := make([]byte, bm.dataSize)
 			b.ResetTimer()
 
-			for i := 0; i < b.N; i++ {
-				cache.Set(strconv.Itoa(i), value, time.Minute * 20)
+			for n := 0; n < b.N; n++ {
+				cache.Set(strconv.Itoa(n), value, time.Minute * 20)
 			}
 		})
 	}
@@ -187,7 +204,16 @@ func BenchmarkDelete(b *testing.B) {
 	cache := New(time.Second * 30)
 	defer cache.Close()
 
-	for i := 0; i < b.N; i++ {
+	for n := 0; n < b.N; n++ {
 		cache.Delete("abc123")
+	}
+}
+
+func BenchmarkLen(b *testing.B) {
+	cache := New(time.Second * 30)
+	defer cache.Close()
+
+	for n := 0; n < b.N; n++ {
+		cache.Len()
 	}
 }

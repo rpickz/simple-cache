@@ -1,4 +1,6 @@
-package cache
+// Package simplecache contains a concurrency safe, in-memory cache for the low latency retrieval of values which may be
+// computationally intensive to generate or find.
+package simplecache
 
 import (
 	"sync"
@@ -100,4 +102,11 @@ func (c *Cache) Get(key string) (interface{}, bool) {
 // Close terminates the cleaner goroutine, resolving the potential for a goroutine leak.
 func (c *Cache) Close() {
 	close(c.done)
+}
+
+// Len provides the number of items stored in the cache.
+func (c *Cache) Len() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return len(c.data)
 }
