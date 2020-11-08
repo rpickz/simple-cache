@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-func TestCache(t *testing.T) {
-	cache := New(time.Minute)
+func TestHashCache(t *testing.T) {
+	cache := NewHashCache(time.Minute)
 
 	// Get should fail as no item is set
 	val, ok := cache.Get("abc123")
@@ -54,7 +54,7 @@ func TestCache(t *testing.T) {
 
 var cacheResponse interface{}
 
-func BenchmarkGet(b *testing.B) {
+func BenchmarkHashCache_Get(b *testing.B) {
 	benchmarks := []struct {
 		name string
 		dataSize int
@@ -113,7 +113,7 @@ func BenchmarkGet(b *testing.B) {
 
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
-			cache := New(time.Second * 30)
+			cache := NewHashCache(time.Second * 30)
 			defer cache.Close()
 			value := make([]byte, bm.dataSize)
 			for i := 0; i < bm.values; i++ {
@@ -129,7 +129,7 @@ func BenchmarkGet(b *testing.B) {
 	}
 }
 
-func BenchmarkSet(b *testing.B) {
+func BenchmarkHashCache_Set(b *testing.B) {
 	benchmarks := []struct {
 		name string
 		dataSize int
@@ -188,7 +188,7 @@ func BenchmarkSet(b *testing.B) {
 
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {
-			cache := New(time.Second * 30)
+			cache := NewHashCache(time.Second * 30)
 			defer cache.Close()
 			value := make([]byte, bm.dataSize)
 			b.ResetTimer()
@@ -200,8 +200,8 @@ func BenchmarkSet(b *testing.B) {
 	}
 }
 
-func BenchmarkDelete(b *testing.B) {
-	cache := New(time.Second * 30)
+func BenchmarkHashCache_Delete(b *testing.B) {
+	cache := NewHashCache(time.Second * 30)
 	defer cache.Close()
 
 	for n := 0; n < b.N; n++ {
@@ -209,8 +209,8 @@ func BenchmarkDelete(b *testing.B) {
 	}
 }
 
-func BenchmarkLen(b *testing.B) {
-	cache := New(time.Second * 30)
+func BenchmarkHashCache_Len(b *testing.B) {
+	cache := NewHashCache(time.Second * 30)
 	defer cache.Close()
 
 	for n := 0; n < b.N; n++ {

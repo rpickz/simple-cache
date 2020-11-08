@@ -1,5 +1,3 @@
-// Package simplecache contains a concurrency safe, in-memory cache for the low latency retrieval of values which may be
-// computationally intensive to generate or find.
 package simplecache
 
 import (
@@ -9,28 +7,29 @@ import (
 
 const (
 	indefinite time.Duration = -1
+	NeverCleanup time.Duration = -1
 )
 
-// cacheEntry is an individual record within the Cache.
+// cacheEntry is an individual record within the HashCache.
 type cacheEntry struct {
 	expiresAt int64
-	value interface{}
+	value     interface{}
 }
 
-// cacheData is the data store type which backs the Cache.
+// cacheData is the data store type which backs the HashCache.
 type cacheData map[string]cacheEntry
 
-// Cache is a concurrency safe in-memory cache, featuring time duration based entry lifetime and expiry.
-type Cache struct {
+// HashCache is a concurrency safe in-memory cache, featuring time duration based entry lifetime and expiry.
+type HashCache struct {
 	mu   sync.RWMutex
 	data cacheData
 	done chan struct{}
 }
 
-// New creates a new Cache and returns a pointer to it.  If a 'cleanupFrequency' > 0 is provided, the cleaner goroutine
+// NewHashCache creates a new hashCache and returns a pointer to it.  If a 'cleanupFrequency' > 0 is provided, the cleaner goroutine
 // is launched (which removes expired values from the cache).
-func New(cleanupFrequency time.Duration) *Cache {
-	c := &Cache{
+func NewHashCache(cleanupFrequency time.Duration) *HashCache {
+	c := &HashCache{
 		data: make(cacheData),
 		done: make(chan struct{}),
 	}
@@ -41,7 +40,7 @@ func New(cleanupFrequency time.Duration) *Cache {
 }
 
 // cleaner removes expired values from the cache.
-func cleaner(c *Cache, frequency time.Duration) {
+func cleaner(c *HashCache, frequency time.Duration) {
 	ticker := time.NewTicker(frequency)
 	for {
 		select {
@@ -64,7 +63,7 @@ func cleaner(c *Cache, frequency time.Duration) {
 }
 
 // Set sets a value in the cache, which is removed when the 'duration' is exceeded.
-func (c *Cache) Set(key string, value interface{}, duration time.Duration) {
+func (c *HashCache) Set(key string, value interface{}, duration time.Duration) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -75,24 +74,24 @@ func (c *Cache) Set(key string, value interface{}, duration time.Duration) {
 
 	c.data[key] = cacheEntry{
 		expiresAt: expiresAt,
-		value:    value,
+		value:     value,
 	}
 }
 
 // SetIndefinite sets a value in the cache which will not expire.
-func (c *Cache) SetIndefinite(key string, value interface{}) {
+func (c *HashCache) SetIndefinite(key string, value interface{}) {
 	c.Set(key, value, indefinite)
 }
 
 // Delete removes a value from the cache.
-func (c *Cache) Delete(key string) {
+func (c *HashCache) Delete(key string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	delete(c.data, key)
 }
 
 // Get retrieves a value from the cache, using the boolean value to indicate the presence or non-presence of the value.
-func (c *Cache) Get(key string) (interface{}, bool) {
+func (c *HashCache) Get(key string) (interface{}, bool) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	entry, ok := c.data[key]
@@ -100,12 +99,12 @@ func (c *Cache) Get(key string) (interface{}, bool) {
 }
 
 // Close terminates the cleaner goroutine, resolving the potential for a goroutine leak.
-func (c *Cache) Close() {
+func (c *HashCache) Close() {
 	close(c.done)
 }
 
 // Len provides the number of items stored in the cache.
-func (c *Cache) Len() int {
+func (c *HashCache) Len() int {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	return len(c.data)
