@@ -57,91 +57,91 @@ The following are the results:
 ```
 Test                                Iterations              Nanoseconds per Op      Bytes alloc     Allocs
 pkg: simplecache
-BenchmarkHashCache_Get/Byte16x10-12             45408501                22.1 ns/op
-BenchmarkHashCache_Get/Byte16x100-12            50895264                22.0 ns/op
-BenchmarkHashCache_Get/Byte16x1000-12           49851592                21.8 ns/op
-BenchmarkHashCache_Get/Byte16x10000-12          55497226                20.9 ns/op
-BenchmarkHashCache_Get/Byte128x10-12            53074515                22.9 ns/op
-BenchmarkHashCache_Get/Byte128x100-12           51671214                23.0 ns/op
-BenchmarkHashCache_Get/Byte128x1000-12          55143558                21.7 ns/op
-BenchmarkHashCache_Get/Byte128x10000-12         51909048                24.8 ns/op
-BenchmarkHashCache_Get/Byte1024x10-12           54565129                22.7 ns/op
-BenchmarkHashCache_Get/Byte1024x100-12          46009594                22.8 ns/op
-BenchmarkHashCache_Get/Byte1024x1000-12         55138800                20.8 ns/op
-BenchmarkHashCache_Get/Byte1024x10000-12        53092317                21.1 ns/op
-BenchmarkHashCache_Get/Byte8192x10-12           53481157                21.4 ns/op
-BenchmarkHashCache_Get/Byte8192x100-12          49936424                22.0 ns/op
-BenchmarkHashCache_Get/Byte8192x1000-12         53615840                21.8 ns/op
-BenchmarkHashCache_Get/Byte8192x10000-12        53922898                20.9 ns/op
-BenchmarkHashCache_Get/Byte65536x10-12          50914202                22.5 ns/op
-BenchmarkHashCache_Get/Byte65536x100-12         54566184                22.3 ns/op
-BenchmarkHashCache_Get/Byte65536x1000-12        52880586                21.5 ns/op
-BenchmarkHashCache_Get/Byte65536x10000-12       51452203                21.5 ns/op
-BenchmarkHashCache_Get/Byte524288x10-12         54579868                23.6 ns/op
-BenchmarkHashCache_Get/Byte524288x100-12        47658624                22.3 ns/op
-BenchmarkHashCache_Get/Byte524288x1000-12       54127789                21.4 ns/op
-BenchmarkHashCache_Get/Byte524288x10000-12      49856299                22.9 ns/op
-BenchmarkHashCache_Get/Byte4194304x10-12        55792357                22.8 ns/op
-BenchmarkHashCache_Get/Byte4194304x100-12       48027753                22.4 ns/op
-BenchmarkHashCache_Get/Byte4194304x1000-12      53771000                21.6 ns/op
-BenchmarkHashCache_Get/Byte4194304x10000-12     49844733                23.8 ns/op
-BenchmarkHashCache_Get/Byte33554432x10-12       54154126                22.0 ns/op
-BenchmarkHashCache_Get/Byte33554432x100-12      50052015                21.4 ns/op
-BenchmarkHashCache_Get/Byte33554432x1000-12     53546043                22.9 ns/op
-BenchmarkHashCache_Get/Byte33554432x10000-12            55401746                22.3 ns/op
-BenchmarkHashCache_Get/Byte268435456x10-12              54343042                21.9 ns/op
-BenchmarkHashCache_Get/Byte268435456x100-12             54233667                23.7 ns/op
-BenchmarkHashCache_Get/Byte268435456x1000-12            54720808                20.9 ns/op
-BenchmarkHashCache_Get/Byte268435456x10000-12           52620936                24.7 ns/op
-BenchmarkHashCache_Get/Byte2147483648x10-12             54573882                21.6 ns/op
-BenchmarkHashCache_Get/Byte2147483648x100-12            48646939                22.6 ns/op
-BenchmarkHashCache_Get/Byte2147483648x1000-12           56910170                22.8 ns/op
-BenchmarkHashCache_Get/Byte2147483648x10000-12          55692628                23.8 ns/op
-BenchmarkHashCache_Set/Byte16x10-12                      2258113               569 ns/op
-BenchmarkHashCache_Set/Byte16x100-12                     2238192               564 ns/op
-BenchmarkHashCache_Set/Byte16x1000-12                    2255827               564 ns/op
-BenchmarkHashCache_Set/Byte16x10000-12                   2225949               569 ns/op
-BenchmarkHashCache_Set/Byte128x10-12                     2237157               570 ns/op
-BenchmarkHashCache_Set/Byte128x100-12                    2256166               571 ns/op
-BenchmarkHashCache_Set/Byte128x1000-12                   2254378               560 ns/op
-BenchmarkHashCache_Set/Byte128x10000-12                  2237065               560 ns/op
-BenchmarkHashCache_Set/Byte1024x10-12                    2244127               562 ns/op
-BenchmarkHashCache_Set/Byte1024x100-12                   2246329               561 ns/op
-BenchmarkHashCache_Set/Byte1024x1000-12                  2289274               552 ns/op
-BenchmarkHashCache_Set/Byte1024x10000-12                 2299333               551 ns/op
-BenchmarkHashCache_Set/Byte8192x10-12                    2281873               554 ns/op
-BenchmarkHashCache_Set/Byte8192x100-12                   2282673               556 ns/op
-BenchmarkHashCache_Set/Byte8192x1000-12                  2251870               557 ns/op
-BenchmarkHashCache_Set/Byte8192x10000-12                 2276329               557 ns/op
-BenchmarkHashCache_Set/Byte65536x10-12                   2275825               558 ns/op
-BenchmarkHashCache_Set/Byte65536x100-12                  2290562               555 ns/op
-BenchmarkHashCache_Set/Byte65536x1000-12                 2276390               555 ns/op
-BenchmarkHashCache_Set/Byte65536x10000-12                2224436               565 ns/op
-BenchmarkHashCache_Set/Byte524288x10-12                  2251174               559 ns/op
-BenchmarkHashCache_Set/Byte524288x100-12                 2243061               569 ns/op
-BenchmarkHashCache_Set/Byte524288x1000-12                2267726               558 ns/op
-BenchmarkHashCache_Set/Byte524288x10000-12               2288089               561 ns/op
-BenchmarkHashCache_Set/Byte4194304x10-12                 2246990               570 ns/op
-BenchmarkHashCache_Set/Byte4194304x100-12                2228106               574 ns/op
-BenchmarkHashCache_Set/Byte4194304x1000-12               2224502               563 ns/op
-BenchmarkHashCache_Set/Byte4194304x10000-12              2269345               561 ns/op
-BenchmarkHashCache_Set/Byte33554432x10-12                2292748               557 ns/op
-BenchmarkHashCache_Set/Byte33554432x100-12               2157140               566 ns/op
-BenchmarkHashCache_Set/Byte33554432x1000-12              2307084               556 ns/op
-BenchmarkHashCache_Set/Byte33554432x10000-12             2265688               559 ns/op
-BenchmarkHashCache_Set/Byte268435456x10-12               2561427               515 ns/op
-BenchmarkHashCache_Set/Byte268435456x100-12              2479664               527 ns/op
-BenchmarkHashCache_Set/Byte268435456x1000-12             2491854               524 ns/op
-BenchmarkHashCache_Set/Byte268435456x10000-12            2506264               517 ns/op
-BenchmarkHashCache_Set/Byte2147483648x10-12              2611123               530 ns/op
-BenchmarkHashCache_Set/Byte2147483648x100-12             2624196               510 ns/op
-BenchmarkHashCache_Set/Byte2147483648x1000-12            2589937               502 ns/op
-BenchmarkHashCache_Set/Byte2147483648x10000-12           2593828               506 ns/op
-BenchmarkHashCache_Delete-12                            50107819                24.1 ns/op
-BenchmarkHashCache_Len-12                               92155755                12.6 ns/op
+BenchmarkHashCache_Get/Byte16x10-12             55476240                22.6 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte16x100-12            53066190                24.4 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte16x1000-12           51842634                22.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte16x10000-12          53608676                22.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte128x10-12            52284294                22.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte128x100-12           48275804                21.4 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte128x1000-12          52628275                21.5 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte128x10000-12         55039910                21.5 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte1024x10-12           52595434                21.4 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte1024x100-12          52467171                22.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte1024x1000-12         53088578                21.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte1024x10000-12        47793980                21.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte8192x10-12           53019108                22.8 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte8192x100-12          53827578                22.2 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte8192x1000-12         55411922                20.8 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte8192x10000-12        52094169                21.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte65536x10-12          48434702                21.5 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte65536x100-12         53755449                22.2 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte65536x1000-12        55333750                20.8 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte65536x10000-12       47729581                24.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte524288x10-12         54539494                22.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte524288x100-12        52138134                21.6 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte524288x1000-12       48840132                21.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte524288x10000-12      52410690                22.1 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte4194304x10-12        50724450                21.5 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte4194304x100-12       49020811                22.1 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte4194304x1000-12      53594049                22.2 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte4194304x10000-12     53532528                21.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte33554432x10-12       51295472                22.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte33554432x100-12      55162215                21.6 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte33554432x1000-12     54156126                21.6 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte33554432x10000-12            47652477                22.5 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte268435456x10-12              54292471                22.1 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte268435456x100-12             55740627                21.3 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte268435456x1000-12            53665546                21.7 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte268435456x10000-12           46311897                22.0 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte2147483648x10-12             55116741                22.4 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte2147483648x100-12            54401917                22.9 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte2147483648x1000-12           59320562                21.8 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Get/Byte2147483648x10000-12          56376190                21.4 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Set/Byte16x10-12                      2226417               579 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte16x100-12                     2214525               585 ns/op             221 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte16x1000-12                    2228475               574 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte16x10000-12                   2235366               577 ns/op             219 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte128x10-12                     2202376               580 ns/op             222 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte128x100-12                    2240728               568 ns/op             218 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte128x1000-12                   2256168               567 ns/op             217 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte128x10000-12                  2238990               574 ns/op             219 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte1024x10-12                    2246172               568 ns/op             218 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte1024x100-12                   2244782               572 ns/op             218 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte1024x1000-12                  2212513               572 ns/op             221 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte1024x10000-12                 2242311               572 ns/op             218 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte8192x10-12                    2218930               571 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte8192x100-12                   2239107               563 ns/op             219 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte8192x1000-12                  2259296               565 ns/op             217 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte8192x10000-12                 2213745               573 ns/op             221 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte65536x10-12                   2226502               577 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte65536x100-12                  2241740               572 ns/op             218 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte65536x1000-12                 2122578               583 ns/op             229 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte65536x10000-12                2228971               572 ns/op             219 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte524288x10-12                  2218023               571 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte524288x100-12                 2222146               577 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte524288x1000-12                2222866               571 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte524288x10000-12               2259063               560 ns/op             217 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte4194304x10-12                 2258872               568 ns/op             217 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte4194304x100-12                2221099               573 ns/op             220 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte4194304x1000-12               2239100               577 ns/op             219 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte4194304x10000-12              2194965               582 ns/op             222 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte33554432x10-12                2215353               617 ns/op             221 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte33554432x100-12               1916194               696 ns/op             249 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte33554432x1000-12              1869169               629 ns/op             254 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte33554432x10000-12             2173021               586 ns/op             224 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte268435456x10-12               2468854               541 ns/op             202 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte268435456x100-12              2533442               518 ns/op             198 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte268435456x1000-12             2536617               522 ns/op             198 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte268435456x10000-12            2484727               524 ns/op             201 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte2147483648x10-12              2617057               520 ns/op             193 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte2147483648x100-12             2618032               494 ns/op             193 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte2147483648x1000-12            2609324               514 ns/op             194 B/op          2 allocs/op
+BenchmarkHashCache_Set/Byte2147483648x10000-12           2475064               561 ns/op             202 B/op          2 allocs/op
+BenchmarkHashCache_Delete-12                            45795818                25.1 ns/op             0 B/op          0 allocs/op
+BenchmarkHashCache_Len-12                               80880376                13.5 ns/op             0 B/op          0 allocs/op
 
 pkg: simplecache/web
-BenchmarkTransactionalHandlerFunc/Get-12                 4693284               252 ns/op
-BenchmarkTransactionalHandlerFunc/Put-12                 3195512               368 ns/op
-BenchmarkTransactionalHandlerFunc/Delete-12             41423528                27.9 ns/op
+BenchmarkTransactionalHandlerFunc/Get-12                 4661180               270 ns/op             131 B/op          3 allocs/op
+BenchmarkTransactionalHandlerFunc/Put-12                 2650690               402 ns/op             560 B/op          3 allocs/op
+BenchmarkTransactionalHandlerFunc/Delete-12             41117755                29.9 ns/op             0 B/op          0 allocs/op
 ```
