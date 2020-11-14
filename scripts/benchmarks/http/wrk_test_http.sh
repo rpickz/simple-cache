@@ -23,22 +23,35 @@ fi
 
 # 4) Run the tests and save results to file.
 echo "== Running GET benchmark =="
-wrk -t12 -c400 -d30s http://localhost:8080/something | tee results/get_results.txt
+cat >wrk_put.lua <<-END
+request = function()
+  param_value = math.random(1, 100000)
+  path = "/something" .. param_value
+  return wrk.format("GET", path)
+end
+END
+wrk -t12 -c400 -d10s http://localhost:8080/something | tee results/get_results.txt
 
 echo "== Running PUT benchmark =="
 cat >wrk_put.lua <<-END
-wrk.method = "POST"
-wrk.body = "{\"key\":\"value\"}"
+request = function()
+  param_value = math.random(1, 100000)
+  path = "/something" .. param_value
+  return wrk.format("POST", path, wrk.headers, "{\"key\":\"value\"}")
+end
 END
-wrk -t12 -c400 -d30s -s wrk_put.lua http://localhost:8080/something | tee results/put_results.txt
+wrk -t12 -c400 -d10s -s wrk_put.lua http://localhost:8080/something | tee results/put_results.txt
 rm wrk_put.lua
 
 echo "== Running DELETE benchmark =="
 cat >wrk_del.lua <<-END
-wrk.method = "POST"
-wrk.body = "{\"key\":\"value\"}"
+request = function()
+  param_value = math.random(1, 100000)
+  path = "/something" .. param_value
+  return wrk.format("DELETE", path, wrk.headers, "{\"key\":\"value\"}")
+end
 END
-wrk -t12 -c400 -d30s -s wrk_del.lua http://localhost:8080/something | tee results/del_results.txt
+wrk -t12 -c400 -d10s -s wrk_del.lua http://localhost:8080/something | tee results/del_results.txt
 rm wrk_del.lua
 
 # 5) Kill the application.
