@@ -7,6 +7,8 @@ import (
 	"simplecache"
 	"simplecache/web"
 	"time"
+
+	_ "net/http/pprof"
 )
 
 func main() {
